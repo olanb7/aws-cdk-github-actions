@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  action:
+    build: .
+    environment:
+        CI: true
+        GITHUB_ACTION: "test-run"
+        GITHUB_EVENT_NAME: test
+        GITHUB_WORKSPACE: /opt/workspace
+        INPUT_CDK_ARGS: ""
+        INPUT_CDK_STACK: "GraphQlLambda"
+        INPUT_CDK_SUBCOMMAND: synth
+        INPUT_WORKING_DIR: "cdk"
+    volumes:
+        - "${PATH_TO_LOCAL_WORKSPACE}:/opt/workspace"

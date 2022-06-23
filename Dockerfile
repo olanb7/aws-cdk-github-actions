@@ -1,10 +1,14 @@
 FROM alpine:3.13
 
-RUN apk --update --no-cache add nodejs npm python3 py3-pip jq curl bash git docker && \
-	ln -sf /usr/bin/python3 /usr/bin/python
+RUN apk --update --no-cache add nodejs npm jq curl bash git docker
 
-COPY --from=golang:alpine /usr/local/go/ /usr/local/go/
-ENV PATH="/usr/local/go/bin:${PATH}"
+RUN npm install -g yarn
+
+# Install esbuild
+# (unsafe-perm because esbuild has a postinstall script)
+ARG ESBUILD_VERSION=0
+RUN yarn config set unsafe-perm true
+RUN yarn global add esbuild@$ESBUILD_VERSION
 
 COPY entrypoint.sh /entrypoint.sh
 
