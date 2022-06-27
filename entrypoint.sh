@@ -12,8 +12,8 @@ function parseInputs(){
 
 function runCdk(){
 
-	echo "Uninstalling older esbuild versions"
-	yarn install
+	# echo "Adding esbuild for this architecture"
+	# yarn add esbuild
 
 	echo "Run yarn cdk ${INPUT_CDK_SUBCOMMAND} ${*} \"${INPUT_CDK_STACK}\""
 	set -o pipefail
